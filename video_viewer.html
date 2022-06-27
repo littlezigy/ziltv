@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+  <head>
+    <title>Video viewer</title>
+    <script src="./dependencies/vue3.global.js"></script>
+  </head>
+
+  <body>
+    <div id='app'>
+      {{ username }}
+      <div v-for='(badge, key) in badges' :key='key'>
+        <img :src='badge.imgUri' />
+      </div>
+
+      <div>
+        <h5>Comments</h5>
+        <div>
+          <h6>Post a comment</h6>
+          <textarea v-model='newComment' placeholder='Type your comment...'></textarea>
+          <button @click='postComment'>Post Comment</button>
+        </div>
+      </div>
+    </div>
+
+
+    <script type='module' src='./src/videoViewer.js'></script>
+  </body>
+</html>
+

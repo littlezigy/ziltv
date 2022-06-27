@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>_testing | Principia Budgeting Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="dependencies/mocha.css" />
+    <script src="../vue3.global.js"></script>
+  </head>
+  <body>
+
+    <a href='unit' target='_blank'>Unit Tests</a>
+    <a href='integration' target='_blank'>Integration Tests</a>
+    <a href='e2e' target='_blank'>E2E Tests</a>
+
+    <div id="mocha"></div>
+
+    <script src='../dependencies/zilliqa.min.js'></script>
+    <script src="./dependencies/chai.js"></script>
+    <script src="./dependencies/mocha.js"></script>
+    <script> var { expect } = chai; </script>
+
+    <script type='module' class="mocha-init">
+      mocha.setup('bdd');
+    </script>
+    <script type='module' src="run.js"></script>
+  </body>
+</html>
+

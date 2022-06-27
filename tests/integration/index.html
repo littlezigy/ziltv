@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Unit Tests | Principia Budgeting Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+    <script src="../vue3.global.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <script src="dependencies/chai.js"></script>
+    <script>
+      var { expect } = chai;
+    </script>
+    <script src="dependencies/mocha.js"></script>
+
+    <script type="text/javascript" src="./dependencies/faker.js"></script>
+    <script type='module' class="mocha-init">
+      mocha.setup('bdd');
+    </script>
+    <script type='module' src="index.js"></script>
+  </body>
+</html>
