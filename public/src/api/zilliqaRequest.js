@@ -1,9 +1,10 @@
 import fetcher from './fetcher.js';
 import connectWallet from "../connectWallet.js"
+import { ZILLIQA_URL } from '/config.local.js';
 
 export default function(nftAddress, address) {
     // const uri = "https://api.zilliqa.com/";
-    const uri = 'https://dev-api.zilliqa.com/';
+    const uri = ZILLIQA_URL;
 
     const queryForNFT = JSON.stringify([
         {
