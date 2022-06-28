@@ -6,6 +6,7 @@ window.localStorage.clear();
 import './fetchUserNFTBalance.js';
 import './badge.api.js';
 import './comments.api.js';
+import './auth.api.js';
 // ------------------
 
 window.localStorage.clear();

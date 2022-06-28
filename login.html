@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+  <head>
+    <title>Login</title>
+    <script src="./dependencies/vue3.global.js"></script>
+  </head>
+
+  <body>
+    <div id='app'>
+      <input type='text' v-model='username' placeholder = 'User name' />
+      <input type='password' v-model='password' placeholder='Password' />
+      <button @click='login'>Login</button>
+
+      <button @click='signup'>Signup</button>
+    </div>
+      <script src = './src/user.js' type='module'></script>
+  </body>
+</html>
+
