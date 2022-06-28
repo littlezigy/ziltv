@@ -18,7 +18,7 @@ server.use('*', function (req, res) {
   // serve file
 });
 
-var port = 8080;
+var port = 3075;
 server.listen(port, function() {
   console.log('server listening on port ' + port);
 });
