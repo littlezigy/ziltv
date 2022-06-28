@@ -1,0 +1,32 @@
+{
+  "name": "ziltv",
+  "version": "1.0.0",
+  "description": "A video sharing platform on the Zilliqa blockchain",
+  "main": "server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/littlezigy/ziltv.git"
+  },
+  "keywords": [
+    "[zilliqa",
+    "entertainment",
+    "social",
+    "media]"
+  ],
+  "author": "Adesuwa Tolu Dawodu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/littlezigy/ziltv/issues"
+  },
+  "homepage": "https://github.com/littlezigy/ziltv#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
