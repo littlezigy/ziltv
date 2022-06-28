@@ -10,6 +10,10 @@ const app = Vue.createApp({
         return fetchAll()
         .then(res => {
             this.videos = res
+            res.forEach(v => {
+                console.log("v:", v);
+                this.$refs['videoRef' + v.id].src = v.url;
+            });
         });
     }
 });

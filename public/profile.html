@@ -6,6 +6,7 @@
   </head>
 
   <body>
+    <div id='menu'></div>
     <div id='app'>
       <input type='text' placeholder='name' v-model='name' />
       <input type='text' placeholder='email' v-model='email' />
@@ -19,6 +20,7 @@
       <button @click="editProfile">Submit</button>
     </div>
 
+    <script type='module' src='/src/components/menu.js'></script>
     <script type='module' src='./src/profile.js'></script>
   </body>
 </html>

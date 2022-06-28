@@ -6,6 +6,7 @@
   </head>
 
   <body>
+    <div id='menu'></div>
     <div id='app'>
       <input type='text' placeholder='badge image url here' v-model='badgeImg' />
       <input type='text' placeholder='nft address goes here' v-model='nftAddress' />
@@ -19,6 +20,7 @@
       <button @click="postBadgeConfig">Submit</button>
     </div>
 
+    <script type='module' src='/src/components/menu.js'></script>
     <script type='module' src='./src/creatorDashboard.js'></script>
   </body>
 </html>
