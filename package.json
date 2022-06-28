@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": ". ./.env.local && pm2 start server.js --name ziltv-frontend",
+    "stop": "pm2 stop ziltv-frontend && pm2 delete ziltv-frontend",
     "dev": ". ./.env.local && node server.js",
     "test": "node test.server.js"
   },
