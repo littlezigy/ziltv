@@ -27,11 +27,10 @@ const app = Vue.createApp({
             this.videoID = videoIDMatch[0];
 
         return videoAPI.fetch(this.videoID)
-        .then(res => {
-            this.video = res;
-            this.$refs.videoRef.src = res.url;
-            return getBadges(this.videoID)
-        })
+            .then(res => {
+                this.video = res;
+                return getBadges(this.videoID)
+            })
             .then(badges => {
                 this.badges = badges;
             });
