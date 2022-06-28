@@ -8,6 +8,10 @@ server.use('/videos/:id', function(req, res) {
     res.sendFile(__dirname + '/public/video_viewer.html');
 });
 
+server.use('/template-video-page', function(req, res) {
+    res.sendFile(__dirname + '/public/template-video-page.html');
+});
+
 // routes
 server.use('*', function (req, res) {
     res.sendFile(__dirname + '/public/404.html');
