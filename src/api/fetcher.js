@@ -1,4 +1,5 @@
 export default function(uri, body, method='POST') {
+    console.log("METHOD:", method, arguments);
     const headers = {
          'Content-Type': 'application/json'
     }
@@ -12,7 +13,6 @@ export default function(uri, body, method='POST') {
     })()
         .then(res => res.json())
         .then(res => {
-            console.log('JSON RES:', res);
             return res;
         });
 }

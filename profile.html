@@ -7,19 +7,19 @@
 
   <body>
     <div id='app'>
-      <input type='text' placeholder='badge image url here' v-model='badgeImg' />
-      <input type='text' placeholder='nft address goes here' v-model='nftAddress' />
-      <select v-model='specifyToken'>
-        <option v-for='(opt, key) in tokenOptions' :key='key'>{{ opt }}</option>
-      </select>
-      <div v-for='(tokenID, key) in tokenIDs' :key='key'>
-        <input type='number' v-model='tokenID' placeholder='token here' />
-      </div>
+      <input type='text' placeholder='name' v-model='name' />
+      <input type='text' placeholder='email' v-model='email' />
 
-      <button @click="postBadgeConfig">Submit</button>
+      <div>
+        <h3>Social Media links</h3>
+        <div v-for='link in links'>
+          <input type='text' v-model='link.name' placeholder='url' />
+        </div>
+
+      <button @click="editProfile">Submit</button>
     </div>
 
-    <script type='module' src='./src/creatorDashboard.js'></script>
+    <script type='module' src='./src/profile.js'></script>
   </body>
 </html>
 

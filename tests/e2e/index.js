@@ -4,6 +4,7 @@ window.localStorage.clear();
 
 // Imports go here
 import './getBadges.js';
+import './userFlow.js';
 // ------------------
 
 window.localStorage.clear();

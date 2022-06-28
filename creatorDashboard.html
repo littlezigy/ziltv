@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+  <head>
+    <title>Profile</title>
+    <script src="./dependencies/vue3.global.js"></script>
+  </head>
+
+  <body>
+    <div id='app'>
+      <input type='text' placeholder='badge image url here' v-model='badgeImg' />
+      <input type='text' placeholder='nft address goes here' v-model='nftAddress' />
+      <select v-model='specifyToken'>
+        <option v-for='(opt, key) in tokenOptions' :key='key'>{{ opt }}</option>
+      </select>
+      <div v-for='(tokenID, key) in tokenIDs' :key='key'>
+        <input type='number' v-model='tokenID' placeholder='token here' />
+      </div>
+
+      <button @click="postBadgeConfig">Submit</button>
+    </div>
+
+    <script type='module' src='./src/creatorDashboard.js'></script>
+  </body>
+</html>
+

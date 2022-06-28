@@ -7,6 +7,7 @@ import './fetchUserNFTBalance.js';
 import './badge.api.js';
 import './comments.api.js';
 import './auth.api.js';
+import './profile.api.js';
 // ------------------
 
 window.localStorage.clear();
