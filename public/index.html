@@ -15,8 +15,14 @@
         <div id='video-grid'>
           <a :href="'videos/' + video.id" v-for='video in videos'>
             <div class='video'>
-              <img :src='video.thumbnail' />
-              <span class='video-title'>{{video.name}}</span>
+              <img class='video-thumbnail' :src='video.thumbnail' />
+              <div class='video-details'>
+                <img class='avatar' :src='video.creator.avatar' :alt='video.creator.name || video.creator.user || "User avatar"' />
+                <div>
+                  <span class='video-title'>{{video.name}}</span>
+                  <p class='video-creator'> {{video.creator.name || video.creator.username}}</p>
+                </div>
+              </div>
             </div>
           </a>
         </div>
