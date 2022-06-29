@@ -12,6 +12,18 @@ server.use('/login', function(req, res) {
     res.sendFile(__dirname + '/public/login.html');
 });
 
+server.use('/upload', function(req, res) {
+    res.sendFile(__dirname + '/public/creatorDashboard.html');
+});
+
+server.use('/channel', function(req, res) {
+    res.sendFile(__dirname + '/public/creatorDashboard.html');
+});
+
+server.use('/profile', function(req, res) {
+    res.sendFile(__dirname + '/public/profile.html');
+});
+
 server.use('/profile/:id', function(req, res) {
     res.sendFile(__dirname + '/public/profile.html');
 });

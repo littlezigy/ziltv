@@ -1,0 +1,39 @@
+:root {
+    --red: red;
+    --dark-blue: #18142f;
+    --light-blue: #1f1a3c;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: var(--dark-blue);
+    color: white;
+}
+
+a, a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+.text-center {
+    text-align: center;
+}
+
+/* MENU */
+#menu {
+    background: var(--light-blue);
+    color: white;
+}
+#menu > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#menu #login-button {
+    font-size: 2rem;
+}
+
+#menu .connnect-wallet {
+    padding: 1rem;
+    border: 2px solid var(--dark-blue);
+}

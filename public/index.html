@@ -2,19 +2,21 @@
 <html lang = 'en'>
   <head>
     <title>ZilTv | Video Streaming</title>
-    <link href='/homepage.css' rel='stylesheet' />
+    <link href='/styles/general.css' rel='stylesheet' />
+    <link href='/styles/homepage.css' rel='stylesheet' />
     <script src="/dependencies/vue3.global.js"></script>
   </head>
 
   <body>
     <div id='menu'></div>
+    <p class='text-center'>Zilliqa is a video creator platform on the Zilliqa blockchain</p>
     <div id='app'>
       <div id='all-videos'>
         <div id='video-grid'>
           <a :href="'videos/' + video.id" v-for='video in videos'>
             <div class='video'>
               <img :src='video.thumbnail' />
-              {{video.name}}
+              <span class='video-title'>{{video.name}}</span>
             </div>
           </a>
         </div>

@@ -1,0 +1,24 @@
+#app {
+    padding: 3rem;
+}
+#video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-gap: 80px 50px;
+}
+
+#video-grid > * {
+    height: 200px;
+    border-radius: 50px;
+}
+#video-grid img {
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.video-title {
+    font-weight: 600;
+    text-underline: none;
+    color: white;
+}

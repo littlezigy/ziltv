@@ -1,5 +1,4 @@
 import fetcher from './fetcher.js';
-import connectWallet from "../connectWallet.js"
 import '../../dependencies/zilliqa.min.js';
 import utils from '../utils/index.js';
 
