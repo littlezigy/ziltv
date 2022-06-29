@@ -1,4 +1,3 @@
-import getBadges from "./getBadges.js"
 import {postComment, getVideoComments} from '/src/api/comment.js';
 import * as videoAPI from '/src/api/video.js';
 
@@ -10,8 +9,6 @@ const app = Vue.createApp({
             badges: [],
             comments: [],
             username: null,
-            newComment: null,
-            canComment: false,
         }
     },
 
@@ -30,18 +27,10 @@ const app = Vue.createApp({
 
         return videoAPI.fetch(this.videoID)
             .then(res => {
+                console.log("video:", this.video);
                 if(res._links && res._links.post_comment)
                     this.canComment = true;
                 this.video = res;
-                return getVideoComments(this.videoID)
-            })
-            .then(res => {
-                const comments = res;
-                this.comments = comments;
-                return getBadges(this.videoID)
-            })
-            .then(badges => {
-                this.badges = badges;
             });
     }
 });

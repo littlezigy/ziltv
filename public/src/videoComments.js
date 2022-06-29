@@ -1,7 +1,5 @@
-import getBadges from "./getBadges.js"
 import getUserBadges from "./getUserBadges.js"
 import {postComment, getVideoComments} from '/src/api/comment.js';
-import {getBadgeConfig} from '/src/api/badges.js';
 import * as videoAPI from '/src/api/video.js';
 
 const app = Vue.createApp({

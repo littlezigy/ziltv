@@ -4,12 +4,12 @@
     <title>Video | ZilTv</title>
     <script src="/dependencies/vue3.global.js"></script>
     <link href='/video.css' rel='stylesheet' />
+    <link href='/video.page.css' rel='stylesheet' />
   </head>
 
   <body>
     <div id='menu'></div>
     <div id='videoApp'>
-      {{ username }}
       <div v-for='(badge, key) in badges' :key='key'>
         <img :src='badge.imgUri' />
       </div>
@@ -19,6 +19,7 @@
 
       <p>{{ video.name }}</p>
     </div>
+
     <div id='comments'>
       <h5 class='title'>Comments</h5>
       <div>
@@ -26,7 +27,7 @@
           <p class='comment'>{{comment.text}} </p>
           <a target='_blank' :href="'/profile/' + comment.poster.id">
             <p class='user'>{{comment.poster.name}}
-            <img v-for='badge in comment.poster.badges' :src='badge.imgUri' />
+            <img class='badge' v-for='badge in comment.poster.badges' :src='badge.imgUri' />
             </p>
           </a>
         </div>
@@ -37,7 +38,7 @@
         </div>
 
         <div v-else>
-          <p>Log in to post a comment</p>
+          <p><a href='/login'>Log in to post a comment</a></p>
         </div>
       </div>
     </div>
