@@ -8,6 +8,7 @@ import './badge.api.js';
 import './comments.api.js';
 import './auth.api.js';
 import './profile.api.js';
+import './getUserBadges.test.js';
 // ------------------
 
 window.localStorage.clear();

@@ -2,26 +2,32 @@
 <html lang = 'en'>
   <head>
     <title>Profile</title>
-    <script src="./dependencies/vue3.global.js"></script>
+    <script src="/dependencies/vue3.global.js"></script>
   </head>
 
   <body>
     <div id='menu'></div>
     <div id='app'>
-      <input type='text' placeholder='name' v-model='name' />
-      <input type='text' placeholder='email' v-model='email' />
-
+      <p>{{ profile.name }}</p>
+      <p v-if='profile.username'>@{{ profile.username }}</p>
       <div>
         <h3>Social Media links</h3>
-        <div v-for='link in links'>
-          <input type='text' v-model='link.name' placeholder='url' />
+        <div v-for='link in profile.links'>
+          <a :href='link.url' target='_blank'>{{ link.name }}</a>
         </div>
+      </div>
 
-      <button @click="editProfile">Submit</button>
+      <div id='edit-profile' v-if='canEdit'>
+        <input type='text' placeholder='name' v-model='name' />
+        <input type='text' placeholder='email' v-model='email' />
+
+        <button @click="editProfile">Submit</button>
+      </div>
     </div>
 
     <script type='module' src='/src/components/menu.js'></script>
-    <script type='module' src='./src/profile.js'></script>
+    <script type='module' src='/src/profile.js'></script>
+    <script type='module' src='/src/editProfile.js'></script>
   </body>
 </html>
 

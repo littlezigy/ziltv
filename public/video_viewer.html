@@ -8,8 +8,7 @@
 
   <body>
     <div id='menu'></div>
-    <h1>ZilTv</h1>
-    <div id='app'>
+    <div id='videoApp'>
       {{ username }}
       <div v-for='(badge, key) in badges' :key='key'>
         <img :src='badge.imgUri' />
@@ -19,18 +18,33 @@
       </div>
 
       <p>{{ video.name }}</p>
+    </div>
+    <div id='comments'>
+      <h5 class='title'>Comments</h5>
       <div>
-        <h5>Comments</h5>
-        <div>
+        <div class='comment-box' v-for='comment in comments'>
+          <p class='comment'>{{comment.text}} </p>
+          <a target='_blank' :href="'/profile/' + comment.poster.id">
+            <p class='user'>{{comment.poster.name}}
+            <img v-for='badge in comment.poster.badges' :src='badge.imgUri' />
+            </p>
+          </a>
+        </div>
+        <div id='addComment' v-if='canComment'>
           <h6>Add a comment</h6>
           <textarea v-model='newComment' placeholder='Type your comment...'></textarea>
           <button @click='postComment'>Post Comment</button>
+        </div>
+
+        <div v-else>
+          <p>Log in to post a comment</p>
         </div>
       </div>
     </div>
 
     <script type='module' src='/src/components/menu.js'></script>
     <script type='module' src='/src/video.js'></script>
+    <script type='module' src='/src/videoComments.js'></script>
     <script type='module' src='/src/videoViewerTemplate.js'></script>
     <script type='module' src='/src/videoViewerScript.js'></script>
   </body>

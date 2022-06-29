@@ -11,7 +11,5 @@ export function fetchProfile(id) {
 }
 
 export function editProfile(data) {
-    console.log("data:", data);
-    console.log('profile', data, 'PUT')
     return server("profile", data, "PUT")
 }

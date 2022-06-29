@@ -1,43 +1,62 @@
 import fetcher from './fetcher.js';
-import connectWallet from "../connectWallet.js"
-import '../../dependencies/zilliqa.min.js';
+import '/dependencies/zilliqa.min.js';
 import utils from '../utils/index.js';
+import { ZILLIQA_URL } from '/config.local.js';
 
-export default function(nftAddresses, address) {
-    // const uri = "https://api.zilliqa.com/";
-    const checksumAddress = utils.address.toBytes20(address);
-    address = checksumAddress.toLowerCase();
+export default function(nftAddress, addresses) {
+    if(!Array.isArray(addresses))
+        addresses = [addresses];
+    if(Array.isArray(nftAddress))
+        nftAddress = nftAddress[0];
 
-    const uri = 'https://dev-api.zilliqa.com/';
+    const base16Address = {}
+    addresses.forEach(address => base16Address[address] = utils.address.toBytes20(address).toLowerCase());
+
+    const uri = ZILLIQA_URL;
     const z = new Zilliqa.Zilliqa(uri);
 
-    return Promise.all(nftAddresses.map(nftAddress => {
-        let ans = {nftAddress};
+    let ans = {};
 
-        nftAddress = utils.address.toBytes20(nftAddress);
-        let contract = z.contracts.at(nftAddress);
+    nftAddress = utils.address.toBytes20(nftAddress);
+    let contract = z.contracts.at(nftAddress);
 
-        return contract.getSubState('balances', [address.toLowerCase()])
-            .then(res => {
-                let balance = res.balances[address.toLowerCase()];
+    return contract.getSubState('balances')
+        .then(res => {
+            let promiseChain = Promise.resolve();
 
-                if(balance && typeof balance =='string')
-                    balance = parseInt(balance);
+            addresses.forEach(address => {
+                if(res && res.balances) {
+                    let balance = res.balances[
+                        utils.address.toBytes20(address).toLowerCase()
+                    ];
 
-                ans =  {...ans, balance} 
-            })
-            .then(res => contract.getSubState('token_owners'))
-            .then(res => {
-                ans.tokenIDs = Object.keys(res.token_owners);
-                return ans;
+                    if(balance) {
+                        if(typeof balance =='string')
+                            balance = parseInt(balance);
+
+                        ans[address] = {balance} 
+
+                        promiseChain = promiseChain
+                            .then(() => contract.getSubState('token_owners'))
+                            .then(res => {
+                                if(res) {
+                                    const tokenOwners = res.token_owners;
+                                    addresses.forEach(address => {
+                                        const tokenIDs = []
+                                        for(let token in tokenOwners) {
+                                            if(tokenOwners[token] == base16Address[address])
+                                                tokenIDs.push(token);
+                                        }
+                                        if(tokenIDs.length > 0)
+                                            ans[address].tokenIDs = tokenIDs;
+                                    });
+                                }
+                            });
+                    } else return ans
+                }  else return ans;
             });
-    })).then(res => {
-        const ans = {};
 
-        res.forEach(({balance, nftAddress, tokenIDs}) => {
-            ans[nftAddress] = {balance, tokenIDs}
-        });
-
-        return ans
-    });
+            return promiseChain
+            .then(() => ans);
+        })
 }
