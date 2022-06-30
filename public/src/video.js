@@ -9,6 +9,7 @@ const app = Vue.createApp({
             badges: [],
             comments: [],
             username: null,
+            badgeConfig: [],
         }
     },
 
@@ -27,7 +28,7 @@ const app = Vue.createApp({
 
         return videoAPI.fetch(this.videoID)
             .then(res => {
-                console.log("video:", this.video);
+                this.badgeConfig = res.badgeConfig;
                 if(res._links && res._links.post_comment)
                     this.canComment = true;
                 this.video = res;

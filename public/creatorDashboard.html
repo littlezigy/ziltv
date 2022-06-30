@@ -2,20 +2,29 @@
 <html lang = 'en'>
   <head>
     <title>Your Channel</title>
+    <link href='/styles/general.css' rel='stylesheet' />
     <script src="./dependencies/vue3.global.js"></script>
   </head>
 
   <body>
     <div id='menu'></div>
     <div id='app'>
-      <input type='text' placeholder='badge image url here' v-model='badgeImg' />
-      <input type='text' placeholder='nft address goes here' v-model='nftAddress' />
-      <select v-model='specifyToken'>
-        <option v-for='(opt, key) in tokenOptions' :key='key'>{{ opt }}</option>
-      </select>
-      <div v-for='(tokenID, key) in tokenIDs' :key='key'>
-        <input type='number' v-model='tokenID' placeholder='token here' />
+      <h3>Configure your channel badges</h3>
+      <p>You can reward holders of certain NFTs, and even specific tokens within that NFT with a badge</p>
+      <label>Add an NFT<input type='text' placeholder='nft address goes here' v-model='nftAddress' /></label>
+      <label>Who should get this badge?
+        <select v-model='specifyToken'>
+          <option v-for='(opt, key) in tokenOptions' :value='opt.value' :key='key'>{{ opt.title }}</option>
+        </select>
+      </label>
+      <div v-if='specifyToken !="false"'>
+        <label v-for='(tokenID, key) in tokenIDs' :key='key'>
+          Enter Token ID: <input type='number' v-model='tokenIDs[key]' placeholder='token here' />
+        </label>
+
+        <button @click='tokenIDs.push("")'>Add token ID</button>
       </div>
+      <label>Badge image: <input type='text' placeholder='Enter an image url here' v-model='badgeImg' /></label>
 
       <button @click="postBadgeConfig">Submit</button>
     </div>

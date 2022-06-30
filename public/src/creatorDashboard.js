@@ -5,9 +5,13 @@ const app = Vue.createApp({
         return {
             badgeImg: null,
             nftAddress: null,
-            specifyToken: 'oneOf',
-            tokenOptions: ['false', 'oneOf', 'allOf'],
-            tokenIDs: [1, 2, 3, 4,5]
+            specifyToken: 'false',
+            tokenOptions: [
+                {value: 'false', title:'Holders of any token in this contract', },
+                {value: 'oneOf', title: 'Holders of any of the token ids listed' },
+                {value: 'allOf', title: 'Holder with all of the token ids lsted'}
+            ],
+            tokenIDs: ['']
         }
     },
     methods: {

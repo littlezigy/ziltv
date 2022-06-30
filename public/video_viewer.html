@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang = 'en'>
   <head>
-    <title>Video | ZilTv</title>
+    <title>Loading... | ZilTv</title>
     <script src="/dependencies/vue3.global.js"></script>
     <link href='/styles/general.css' rel='stylesheet' />
     <link href='/video.css' rel='stylesheet' />
-    <link href='/video.page.css' rel='stylesheet' />
+    <link href='/styles/video.page.css' rel='stylesheet' />
   </head>
 
   <body>
@@ -15,7 +15,30 @@
         <img :src='badge.imgUri' />
       </div>
 
-      <div id='videoViewerT'>
+      <div id = 'video-box1'>
+        <div id='videoViewerT'>
+        </div>
+
+        <div>
+          <div id='creator-badges' class='badge-data'>
+            <p>This creator is rewarding holders of the following NFTs with badges. Support this creator by buying one of these NFTs.</p>
+            <p>You get cool badges for owning these NFTs</p>
+            <div v-for='(badge, i) in badgeConfig'>
+              <div v-if='i<3'>
+              {{ badge.nftAddress }}
+              <p v-if='badge.specifyTokens=="oneOf"'>one of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
+              <p v-else-if='badge.specifyTokens=="allOf"'>all of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
+              <img class='badge' :src='badge.badgeImg' />
+            </div>
+            </div>
+          </div>
+          <div id='user-owned-badges' class='badge-data'>
+            <p v-if='noConnectWallet'>Connect your wallet to see how many badges you have.</p>
+            <div v-else>
+              <p>You have the following badges</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <p>{{ video.name }}</p>
@@ -44,6 +67,7 @@
       </div>
     </div>
 
+    <script type='module' src='/src/ctaBadges.js'></script>
     <script type='module' src='/src/components/menu.js'></script>
     <script type='module' src='/src/video.js'></script>
     <script type='module' src='/src/videoComments.js'></script>

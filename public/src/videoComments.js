@@ -5,8 +5,10 @@ import * as videoAPI from '/src/api/video.js';
 const app = Vue.createApp({
     data() {
         return {
+            badgeConfig: [],
             comments: [],
             username: null,
+            noConnectWallet: true
         }
     },
 
@@ -20,7 +22,8 @@ const app = Vue.createApp({
 
         return videoAPI.fetch(this.videoID)
             .then(res => {
-                badgeConfig = res.badgeConfig;
+                document.title = res.name + ' | ZilTv';
+                this.badgeConfig = res.badgeConfig;
                 return getVideoComments(this.videoID)
             })
             .then(res => {
