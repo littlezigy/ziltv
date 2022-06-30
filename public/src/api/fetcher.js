@@ -13,7 +13,7 @@ export default function(uri, body, method='POST') {
 
         }
         else
-            return fetch(uri)
+            return fetch(uri, otherConfig)
     })()
         .then(res => res.json())
         .then(res => {
