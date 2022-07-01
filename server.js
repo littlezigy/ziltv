@@ -4,6 +4,8 @@ var server = express();
 // middleware
 server.use('/', express.static(__dirname + '/public'));
 
+server.use('/src', express.static(__dirname + '/src'));
+
 server.use('/videos/:id', function(req, res) {
     res.sendFile(__dirname + '/public/video_viewer.html');
 });
