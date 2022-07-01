@@ -8,7 +8,7 @@ const app = Vue.createApp({
             <div class='menu-two'>
                 <button class='connect-wallet' @click='connectWallet'>Connect Wallet</button>
                 <a id='login-button' v-if='!isLoggedIn' href='/login'>Login</a>
-                <a v-if='isLoggedIn' href='/upload'>Upload</a>
+                <a v-if='isLoggedIn' href='/profile'>My Profile</a>
                 <a v-if='isLoggedIn' href='/dashboard'>My Dashboard</a>
             </div>
         </div>

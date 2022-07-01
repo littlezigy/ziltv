@@ -16,6 +16,7 @@
 
 
     <div id='video-upload'>
+      <h3>Upload a video</h3>
       <input name='video' id='upload' type='file' ref='fileUpload' accept=".mp3,.mp4, video/*">
 
       <label>Name: <input type='text' v-model='name' placeholder='Video name' /></label>
@@ -34,7 +35,7 @@
 
     <div id='my-videos'>
       <h3>Videos You've uploaded</h3>
-      <div v-if='videos && Array.isArray(videos)'>
+      <div v-if='videos && Array.isArray(videos) && videos.length > 0'>
         <a v-for = 'video in videos' target='_blank' :href='"/videos/" + video.id'>
           <div class='video-details'>
             <img :src='video.thumbnail' :alt='"Thumbnail of " + video.name + " video"' />
@@ -88,7 +89,10 @@
             <span v-for='id in config.tokenIDs'>{{ id }}&nbsp;</span>
             in NFT contract
           </span> 
-          <span> {{ config.nftAddress }}</span>
+          <a :href='config.nft.url' target='_blank'>
+            <span v-if='config.nft && config.nft.address'> {{ config.nft.name || config.nft.address }}</span>
+            <span v-else> {{ config.nftAddress }}</span>
+          </a>
 
           <span> will receive&nbsp;</span>
           <img class='badge' :src='config.badgeImg' />

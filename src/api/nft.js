@@ -4,19 +4,30 @@ import utils from '../utils/index.js';
 import { ZILLIQA_URL } from '/config.local.js';
 
 export function getNFTMetadata(nftAddress) {
-    if(Array.isArray(nftAddress))
-        nftAddress = nftAddress[0];
+    if(!Array.isArray(nftAddress))
+        nftAddress = [nftAddress];
 
     const uri = ZILLIQA_URL;
     const z = new Zilliqa.Zilliqa(uri);
 
     let ans = {};
 
-    nftAddress = utils.address.toBytes20(nftAddress);
-    let contract = z.contracts.at(nftAddress);
+    const requests = nftAddress.map(i => {
+        return [utils.address.toBytes20(i).substring(2), 'token_name', []]
+    });
+    const blockchain = z.blockchain;
 
-    return contract.getSubState('name')
+    return blockchain.getSmartContractSubStateBatch(requests)
         .then(res => {
-            console.log("nft metadata:", res);
+            res = res.batch_result;
+            const response = {}
+            nftAddress.forEach((a, index) => {
+                if(res[index].result) {
+                    response[a] = {
+                        name: res[index].result.token_name
+                    }
+                }
+            });
+            return response;
         })
 }
