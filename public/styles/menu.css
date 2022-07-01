@@ -5,6 +5,10 @@
     padding: 0.5rem 1rem;
 }
 
+#menu a, #menu a:visited {
+    border: none;
+}
+
 #menu .menu-two {
     display: flex;
     align-items: space-between;

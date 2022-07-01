@@ -1,5 +1,6 @@
 import {postComment, getVideoComments} from '/src/api/comment.js';
 import * as videoAPI from '/src/api/video.js';
+import addNFTMetadata from '/src/addNFTMetadata.js';
 
 const app = Vue.createApp({
     data() {
@@ -32,6 +33,10 @@ const app = Vue.createApp({
                 if(res._links && res._links.post_comment)
                     this.canComment = true;
                 this.video = res;
+
+                return addNFTMetadata(this.badgeConfig)
+            }).then(res => {
+                this.badgeConfig = res;
             });
     }
 });

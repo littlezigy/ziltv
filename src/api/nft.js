@@ -4,8 +4,11 @@ import utils from '../utils/index.js';
 import { ZILLIQA_URL } from '/config.local.js';
 
 export function getNFTMetadata(nftAddress) {
-    if(!Array.isArray(nftAddress))
+    if(!Array.isArray(nftAddress)) {
+        if(nftAddress.length < 42)
+            return false;
         nftAddress = [nftAddress];
+    }
 
     const uri = ZILLIQA_URL;
     const z = new Zilliqa.Zilliqa(uri);

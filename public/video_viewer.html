@@ -20,13 +20,19 @@
         <div id='videoViewerT'>
         </div>
 
-        <div>
+        <div id='badge-configs' v-if='badgeConfig && badgeConfig.length > 0'>
           <div id='creator-badges' class='badge-data'>
+            {{ badgeConfigs }}
             <p>This creator is rewarding holders of the following NFTs with badges. Support this creator by buying one of these NFTs.</p>
             <p>You get cool badges for owning these NFTs</p>
             <div v-for='(badge, i) in badgeConfig'>
               <div v-if='i<3'>
-              {{ badge.nftAddress }}
+              <div v-if='badge.nft && badge.nft.address'>
+                  <a :href='badge.nft.url' target='_blank'>
+                    <span v-if='badge.nft && badge.nft.address'> {{ badge.nft.name || badge.nft.address }}</span>
+                    <span v-else> {{ badge.nftAddress }}</span>
+                  </a>
+              </div>
               <p v-if='badge.specifyTokens=="oneOf"'>one of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
               <p v-else-if='badge.specifyTokens=="allOf"'>all of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
               <img class='badge' :src='badge.badgeImg' />
@@ -68,8 +74,8 @@
       </div>
     </div>
 
-    <script type='module' src='/src/ctaBadges.js'></script>
     <script type='module' src='/src/components/menu.js'></script>
+    <script type='module' src='/src/badgeConfig.vue.js'></script>
     <script type='module' src='/src/video.js'></script>
     <script type='module' src='/src/videoComments.js'></script>
     <script type='module' src='/src/videoViewerTemplate.js'></script>

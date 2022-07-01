@@ -11,6 +11,7 @@ const app = Vue.createApp({
             badgeName: null,
             badgeImg: null,
             nftAddress: null,
+            nftName: null,
             specifyToken: 'false',
             tokenOptions: [
                 {value: 'false', title:'Holders of any token in this contract', },
@@ -18,6 +19,20 @@ const app = Vue.createApp({
                 {value: 'allOf', title: 'Holder with all of the token ids lsted'}
             ],
             tokenIDs: ['']
+        }
+    },
+    watch: {
+        nftAddress(address) {
+            if(!address)
+                return null;
+            if(address.length < 42)
+                return null
+            
+            return getNFTMetadata([address])
+            .then(metadata => {
+                if(metadata[address])
+                    this.nftName = metadata[address].name;
+                });
         }
     },
     methods: {

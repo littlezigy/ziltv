@@ -23,6 +23,7 @@ const app = Vue.createApp({
         return videoAPI.fetch(this.videoID)
             .then(res => {
                 document.title = res.name + ' | ZilTv';
+                badgeConfig = res.badgeConfig;
                 this.badgeConfig = res.badgeConfig;
                 return getVideoComments(this.videoID)
             })
@@ -30,12 +31,6 @@ const app = Vue.createApp({
                 let promiseChain = Promise.resolve();
                 let comments = res;
                 this.comments = comments;
-
-                // const nftAddresses = [...new Set(badgeConfig.map(b => b.nftAddress))];
-                console.log(
-                    comments.map(c => c.poster.bech32),
-                    badgeConfig
-                )
 
                 return getUserBadges(
                     comments.map(c => c.poster.bech32),

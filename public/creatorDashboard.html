@@ -54,7 +54,9 @@
     <div id='app' class='page'>
       <h3>Configure your channel badges</h3>
       <p>You can reward holders of certain NFTs, and even specific tokens within that NFT with a badge</p>
-      <label>Add an NFT<input type='text' placeholder='nft address goes here' v-model='nftAddress' /></label>
+      <label>Add an NFT<input type='text' placeholder='ZRC-6 nft address goes here' v-model='nftAddress' />
+        {{ nftName }}
+      </label>
       <label>Who should get this badge?
         <select v-model='specifyToken'>
           <option v-for='(opt, key) in tokenOptions' :value='opt.value' :key='key'>{{ opt.title }}</option>
