@@ -29,3 +29,22 @@ img.badge {
     padding: 1rem;
     border-radius: 5px;
 }
+
+.comment-box {
+    margin-bottom: 2rem;
+}
+
+.comment-box .badge {
+    width: 23px;
+    height: 23px;
+    margin-left: 0.5rem;
+    box-shadow: 2px 2px 6px 2px var(--chalk);
+}
+
+.comment-box .user {
+    display: flex;
+    align-items: center;
+}
+.comment-box p {
+    margin: 0.2rem;
+}

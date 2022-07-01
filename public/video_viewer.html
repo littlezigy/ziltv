@@ -27,16 +27,16 @@
             <p>You get cool badges for owning these NFTs</p>
             <div v-for='(badge, i) in badgeConfig'>
               <div v-if='i<3'>
-              <div v-if='badge.nft && badge.nft.address'>
+                <div v-if='badge.nft && badge.nft.address'>
                   <a :href='badge.nft.url' target='_blank'>
                     <span v-if='badge.nft && badge.nft.address'> {{ badge.nft.name || badge.nft.address }}</span>
                     <span v-else> {{ badge.nftAddress }}</span>
                   </a>
+                </div>
+                <p v-if='badge.specifyTokens=="oneOf"'>one of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
+                <p v-else-if='badge.specifyTokens=="allOf"'>all of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
+                <img class='badge' :src='badge.badgeImg' />
               </div>
-              <p v-if='badge.specifyTokens=="oneOf"'>one of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
-              <p v-else-if='badge.specifyTokens=="allOf"'>all of the following tokens: <span>{{ badge.tokenIDs.join(',') }}</span></p>
-              <img class='badge' :src='badge.badgeImg' />
-            </div>
             </div>
           </div>
           <div id='user-owned-badges' class='badge-data'>
@@ -57,9 +57,13 @@
         <div class='comment-box' v-for='comment in comments'>
           <p class='comment'>{{comment.text}} </p>
           <a target='_blank' :href="'/profile/' + comment.poster.id">
-            <p class='user'>{{comment.poster.name}}
-            <img class='badge' v-for='badge in comment.poster.badges' :src='badge.imgUri' />
-            </p>
+            <div class='badges'>
+              <img class='badge' v-for='badge in comment.poster.badges' :src='badge.imgUri' />
+            </div>
+            <div class='details'>
+              <p class='user'>{{comment.poster.name}}
+            </div>
+              </p>
           </a>
         </div>
         <div id='addComment' v-if='canComment'>
