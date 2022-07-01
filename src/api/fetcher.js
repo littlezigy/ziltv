@@ -1,4 +1,5 @@
 export default function(uri, body, method='POST') {
+    let isError;
     const otherConfig = {
         credentials: 'include',
         headers: {
@@ -15,8 +16,13 @@ export default function(uri, body, method='POST') {
         else
             return fetch(uri, otherConfig)
     })()
-        .then(res => res.json())
         .then(res => {
-            return res;
+            if(!res.ok) isError = true;
+            return res.json()
+        })
+        .then(res => {
+            if(isError) throw res
+            else
+                return res;
         });
 }

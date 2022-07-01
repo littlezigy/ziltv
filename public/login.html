@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html lang = 'en'>
-<head>
+  <head>
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='/styles/general.css' rel='stylesheet' />
+    <link href='/styles/login.css' rel='stylesheet' />
     <script src="/dependencies/vue3.global.js"></script>
   </head>
 
   <body>
     <div id='menu'></div>
     <div id='app'>
-      <input type='text' v-model='username' placeholder = 'User name' />
-      <input type='password' v-model='password' placeholder='Password' />
-      <button @click='login'>Login</button>
+      <form id='login' @submit.prevent>
+        <div id='errors' :class='(!error || !error.error) ? "no-errors" : ""'>
+          <p v-if='error'>{{ error.error }}</p>
+        </div>
 
-      <button @click='signup'>Signup</button>
+        <label><span>Username</span>
+        <input type='text' v-model='username' placeholder = 'User name' />
+        </label>
+        <label><span>Password</span>
+          <input type='password' v-model='password' placeholder='Password' />
+        </label>
+
+        <div class='actions' v-if='toSignup'>
+          <button @click='signup'>Sign up</button>
+          <button type='button' id='signin-option' @click='toSignup=false; clearErrors()'>Have an account? Login instead</button>
+        </div>
+
+        <div class='actions' v-else>
+          <button @click='login'>Login</button>
+          <button type='button' id='signin-option' @click='toSignup=true; clearErrors()'>New here? Sign up</button>
+        </div>
+      </form>
     </div>
 
     <script type='module' src='/src/components/menu.js'></script>

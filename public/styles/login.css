@@ -1,0 +1,46 @@
+#login {
+    padding: 2rem;
+    width: 400px;
+}
+
+#errors.no-errors {
+    background: none;
+    border: none;
+}
+
+#errors {
+    padding: 0.5rem;
+    text-align: center;
+    width: 100%;
+    background: var(--pink);
+    border: 1px solid red;
+    border-radius: 5px;
+    height: 80px;
+    color: var(--readable-red);
+}
+
+#login label span {
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+#signin-option {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: block;
+    text-align: right;
+}
+
+#login label input {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+#app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
