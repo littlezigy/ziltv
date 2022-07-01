@@ -6,11 +6,18 @@ img.badge {
 #video-box1 {
     padding: 2rem;
     display: flex;
+    flex-wrap: wrap;
     grid-gap: 2rem;
 }
 
 #creator-badges {
     background: var(--torquoise);
+    width: 400px;
+}
+
+#video-name {
+    font-weight: 600px;
+    font-size: 2rem;
 }
 
 #creator-badges img.badge {

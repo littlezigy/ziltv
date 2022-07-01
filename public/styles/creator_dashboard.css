@@ -1,0 +1,25 @@
+#video-upload video {
+    height: 400px;
+}
+
+#my-videos .video-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    height: 80px;
+    border: 2px solid var(--lightest-blue);
+    background: var(--blue);
+
+    border-radius: 5px;
+
+    margin-top: 2rem;
+}
+
+#my-videos .video-details:hover {
+    background: var(--lightest-blue);
+}
+
+#my-videos .video-details img {
+    height: 100px;
+}

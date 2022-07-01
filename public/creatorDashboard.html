@@ -4,6 +4,7 @@
     <title>Your Channel | ZilTv</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='/styles/general.css' rel='stylesheet' />
+    <link href='/styles/creator_dashboard.css' rel='stylesheet' />
     <script src="./dependencies/vue3.global.js"></script>
     <script src="./dependencies/ipfs.js"></script>
     <script src="./dependencies/ipfs-http-client.js"></script>
@@ -32,15 +33,18 @@
 
 
     <div id='my-videos'>
+      <h3>Videos You've uploaded</h3>
       <div v-if='videos && Array.isArray(videos)'>
-        <div v-for = 'video in videos'>
-          <p>{{video.name}}</p>
-          <img :src='video.thumbnail' :alt='"Thumbnail of " + video.name + " video"' />
-        </div>
+        <a v-for = 'video in videos' target='_blank' :href='"/videos/" + video.id'>
+          <div class='video-details'>
+            <img :src='video.thumbnail' :alt='"Thumbnail of " + video.name + " video"' />
+            <p>{{video.name}}</p>
+          </div>
+        </a>
       </div>
 
       <div v-else>
-        <p>No videos</p>
+        <p>You haven't uploaded videos</p>
       </div>
     </div>
 

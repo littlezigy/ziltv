@@ -1,8 +1,12 @@
 :root {
     --red: red;
+    --darkest-blue: #18142f;
     --dark-blue: #18142f;
-    --light-blue: #1f1a3c;
+    --blue: #1f1a3c;
+    --light-blue: #393164;
+    --lightest-blue: #393164;
     --torquoise: #14343c;
+    --black: black;
 }
 
 body {
