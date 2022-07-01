@@ -12,6 +12,10 @@ server.use('/login', function(req, res) {
     res.sendFile(__dirname + '/public/login.html');
 });
 
+server.use('/dashboard', function(req, res) {
+    res.sendFile(__dirname + '/public/creatorDashboard.html');
+});
+
 server.use('/upload', function(req, res) {
     res.sendFile(__dirname + '/public/creatorDashboard.html');
 });

@@ -1,14 +1,52 @@
 <!DOCTYPE html>
 <html lang = 'en'>
   <head>
-    <title>Your Channel</title>
+    <title>Your Channel | ZilTv</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='/styles/general.css' rel='stylesheet' />
     <script src="./dependencies/vue3.global.js"></script>
+    <script src="./dependencies/ipfs.js"></script>
+    <script src="./dependencies/ipfs-http-client.js"></script>
   </head>
 
   <body>
     <div id='menu'></div>
-    <div id='app'>
+
+
+
+    <div id='video-upload'>
+      <input name='video' id='upload' type='file' ref='fileUpload' accept=".mp3,.mp4, video/*">
+
+      <label>Name: <input type='text' v-model='name' placeholder='Video name' /></label>
+
+      <label>Describe the video
+        <textarea placeholder='Short sentence describing the video' v-model='description'></textarea>
+      </label>
+
+      <video v-show='fileData' :title='(file && file.name) ? file.name : "upload_video"'  ref='videoRef' src="" controls class="video" id="video" preload="metadata">
+      </video>
+
+      <button :disabled='!fileData' @click='upload'>Upload Video</button>
+    </div>
+
+
+
+    <div id='my-videos'>
+      <div v-if='videos && Array.isArray(videos)'>
+        <div v-for = 'video in videos'>
+          <p>{{video.name}}</p>
+          <img :src='video.thumbnail' :alt='"Thumbnail of " + video.name + " video"' />
+        </div>
+      </div>
+
+      <div v-else>
+        <p>No videos</p>
+      </div>
+    </div>
+
+
+
+    <div id='app' class='page'>
       <h3>Configure your channel badges</h3>
       <p>You can reward holders of certain NFTs, and even specific tokens within that NFT with a badge</p>
       <label>Add an NFT<input type='text' placeholder='nft address goes here' v-model='nftAddress' /></label>
@@ -24,13 +62,110 @@
 
         <button @click='tokenIDs.push("")'>Add token ID</button>
       </div>
-      <label>Badge image: <input type='text' placeholder='Enter an image url here' v-model='badgeImg' /></label>
+      <label>Badge name:
+        <input type='text' placeholder='badge name' v-model='badgeName' />
+      </label>
+      <label>Badge image:
+        <input name='badge-image' id='upload' type='file' ref='fileUpload' accept="image/*,.gif">
+      </label>
 
       <button @click="postBadgeConfig">Submit</button>
+
+      <div>
+        <h3>Badges You've configured</h3>
+        <div v-for='config in badgeConfigs'>
+          <p>
+          <span v-if='config.specifyTokens == "false"'>Holders of </span> 
+          <span v-else-if='config.specifyTokens == "oneOf"'>Holders of any of the tokens
+            <span v-for='(id, index) in config.tokenIDs'><span v-if='index > 0'>, </span>{{ id }}&nbsp;</span>
+            in NFT contract
+          </span> 
+          <span v-else-if='config.specifyTokens == "allOf"'>The holder of all of the tokens
+            <span v-for='id in config.tokenIDs'>{{ id }}&nbsp;</span>
+            in NFT contract
+          </span> 
+          <span> {{ config.nftAddress }}</span>
+
+          <span> will receive&nbsp;</span>
+          <img class='badge' :src='config.badgeImg' />
+          <span>on your channel</span>
+          </p>
+        </div>
+      </div>
     </div>
 
     <script type='module' src='/src/components/menu.js'></script>
-    <script type='module' src='./src/creatorDashboard.js'></script>
+    <script type='module' src='/src/creatorDashboard.badgeConfig.vue.js'></script>
+    <script type='module' src='/src/creatorDashboard.videos.vue.js'></script>
+    <script type='module'>
+      // Video upload
+      import ipfsUpload from '/src/api/ipfsUpload.js';
+      import * as videoAPI from '/src/api/video.js';
+      import getThumbnail from '/src/getThumbnail.js';
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            name: null,
+            description: null,
+            preview: null,
+            file: null,
+            fileData: null
+          }
+        },
+        methods: {
+          upload: function() {
+            const file = this.file;
+
+            if(file) {
+              const description = this.description || 'No description'
+              const name = this.name || 'No name';
+              let thumbnail;
+
+              const videoEl = this.$refs.videoRef;
+
+              return getThumbnail(videoEl)
+              .then(thumbnailBuffer => {
+                return ipfsUpload(thumbnailBuffer, name + (Math.random() * 10000))
+              })
+              .then(res => {
+                thumbnail = res.url;
+                return ipfsUpload(this.file, this.name)
+              })
+                .then(res => {
+                  const url = res.url;
+
+                  return videoAPI.upload({url, description, name, thumbnail});
+                }).then(() => window.location.reload())
+            }
+            else return false;
+          },
+          updatePreview: function() {
+              const file = this.$refs.fileUpload.files[0];
+              const self = this;
+
+              if(file) {
+                  const fileReader = new window.FileReader();
+                  fileReader.readAsDataURL(file);
+                  fileReader.addEventListener('load', function() {
+                      self.preview = this.result;
+                      self.fileData = { file, buffer: this.result };
+                      self.file = file;
+                      if(self.fileData)
+                        self.$refs.videoRef.src = this.result;
+                  });
+              }
+          },
+        },
+        mounted() {
+          const self = this;
+          this.$refs.fileUpload.addEventListener('change', function() {
+            return self.updatePreview()
+          });
+        }
+      });
+      app.mount('#video-upload')
+    </script>
   </body>
 </html>
 

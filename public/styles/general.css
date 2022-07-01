@@ -28,6 +28,16 @@ a, a:visited {
 
 label {
     display: block;
+    padding: 1rem 0;
+}
+
+.badge {
+    width: 32px;
+    height: 32px;
+}
+
+body > div {
+    padding: 2rem;
 }
 
 /* MENU */
