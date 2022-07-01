@@ -5,7 +5,7 @@ const app = Vue.createApp({
     template: `
         <div>
             <h1><a href='/'>ZilTv</a></h1>
-            <div>
+            <div class='menu-two'>
                 <button class='connect-wallet' @click='connectWallet'>Connect Wallet</button>
                 <a id='login-button' v-if='!isLoggedIn' href='/login'>Login</a>
                 <a v-if='isLoggedIn' href='/upload'>Upload</a>

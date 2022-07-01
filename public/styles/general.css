@@ -1,3 +1,5 @@
+@import "menu.css";
+
 :root {
     --red: red;
     --readable-red: #440606;
@@ -44,25 +46,4 @@ label {
 
 body > div {
     padding: 2rem;
-}
-
-/* MENU */
-#menu {
-    background: var(--light-blue);
-    color: white;
-    padding: 0.5rem 1rem;
-}
-#menu > div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-#menu #login-button {
-    margin-left: 2rem;
-    font-size: 2rem;
-}
-
-#menu .connnect-wallet {
-    padding: 1rem;
-    border: 2px solid var(--dark-blue);
 }

@@ -8,6 +8,11 @@
     border: none;
 }
 
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
 #errors {
     padding: 0.5rem;
     text-align: center;

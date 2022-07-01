@@ -1,4 +1,4 @@
-import {signup, login} from './api/auth.js';
+import {fetchProfile, signup, login} from './api/user.js';
 
 const app = Vue.createApp({
     data() {
@@ -12,6 +12,10 @@ const app = Vue.createApp({
     methods: {
         clearErrors() {
             this.error = null;
+        },
+        checkIfLoggedin() {
+            return fetchProfile()
+            .then(() => window.location.replace('/'));
         },
         signup() {
             this.clearErrors();
@@ -39,7 +43,10 @@ const app = Vue.createApp({
                 .catch(e => {
                     this.error = e;
                 });
-        }
+        },
+    },
+    mounted() {
+        return this.checkIfLoggedin();
     }
 });
 
