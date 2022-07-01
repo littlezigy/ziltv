@@ -21,10 +21,10 @@
 }
 
 #video-grid > * {
-    height: 200px;
-    border-radius: 50px;
+    display: block;
+    border: none;
 }
-img.video-thumbnail {
+#video-grid > * , img.video-thumbnail {
     width: 300px;
     height: 200px;
     border-radius: 8px;
